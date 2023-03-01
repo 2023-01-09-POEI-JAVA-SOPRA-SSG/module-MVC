@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<h1>Liste des Auteurs</h1>
+		
+		
+		<table>
+			<thead>
+				<tr>
+					<td>Id</td>
+					<td>FirstName</td>
+					<td>LastName</td>
+					<td>Age</td>
+					<td>Date Creation</td>
+					<td>Nombre Followers</td>
+					<td>Update</td>
+					<td>Delete</td>				
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="author : ${authors}">
+					<td th:text="${author.id}"></td>
+					<td th:text="${author.firstName}"></td>
+					<td th:text="${author.lastName}"></td>
+					<td th:text="${author.age}"></td>
+					<td th:text="${author.dateCreationCompte}"></td>
+					<td th:text="${author.nbFollowers}"></td>
+					<td> <a th:href="@{/update/{id}(id=${author.id} ) }" >Update</a> </td>
+					<td> <a th:href="@{/delete/{id}(id=${author.id} ) }" >Delete</a> </td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<a th:href="@{/create}">Create Author</a>
+		
+	</body>
+</html>

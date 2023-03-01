@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<h1>CREATE PAGE</h1>
+		
+		<form action="#" th:action="@{/create}" method="post" 
+		th:object="${author}">
+			
+			<label for="firstName"> First Name </label>
+			<input type="text" th:field="*{firstName}">			
+			<br>
+			<label for="lastName"> LastName Name </label>
+			<input type="text" th:field="*{lastName}">			
+			<br>
+			<label for="age"> Age </label>
+			<input type="number" th:field="*{age}">			
+			<br>
+			<label for="dateCreationCompte"> Date </label>
+			<input type="date" th:field="*{dateCreationCompte}">			
+			<br>
+			<label for="nbFollowers"> Nombre Followers </label>
+			<input type="number" th:field="*{nbFollowers}">			
+			<br>			
+			<input type="submit" value="Valider">
+		</form>
+	</body>
+</html>
