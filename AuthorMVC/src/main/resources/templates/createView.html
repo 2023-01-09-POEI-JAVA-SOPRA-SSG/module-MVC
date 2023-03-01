@@ -7,19 +7,24 @@
 		th:object="${author}">
 			
 			<label for="firstName"> First Name </label>
-			<input type="text" th:field="*{firstName}">			
+			<input type="text" th:field="*{firstName}">	
+			<span th:if="${#fields.hasErrors('firstName')}"  th:errors="*{firstName}"></span>
 			<br>
 			<label for="lastName"> LastName Name </label>
 			<input type="text" th:field="*{lastName}">			
+			<span th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"></span>
 			<br>
 			<label for="age"> Age </label>
 			<input type="number" th:field="*{age}">			
+			<span th:if="${#fields.hasErrors('age')}"  th:errors="*{age}"></span>
 			<br>
 			<label for="dateCreationCompte"> Date </label>
 			<input type="date" th:field="*{dateCreationCompte}">			
+			<span th:if="${#fields.hasErrors('dateCreationCompte')}"  th:errors="*{dateCreationCompte}"></span>
 			<br>
 			<label for="nbFollowers"> Nombre Followers </label>
 			<input type="number" th:field="*{nbFollowers}">			
+			<span th:if="${#fields.hasErrors('nbFollowers')}"  th:errors="*{nbFollowers}"></span>
 			<br>			
 			<input type="submit" value="Valider">
 		</form>
