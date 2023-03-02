@@ -1,12 +1,13 @@
 package com.m2i.introMVC.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,9 @@ public class HelloController {
 		m.addAttribute("date", new Date());
 		m.addAttribute("listProducts", pService.getAllProducts());
 		
+		m.addAttribute("key", "value");
+		
+		
 		return "index";
 	}
 	
@@ -37,13 +41,33 @@ public class HelloController {
 		return "create";
 	}
 	
+	@GetMapping("/update/{id}")
+	public String updateView(@PathVariable("id") int id, Model m) {
+		
+		m.addAttribute("product", pService.getById(id) );
+		
+		return "update";
+	}
+	
+	
 	@PostMapping("/create")
-	public String addProduct(Product p) {
+	public String addProduct(Model m, @Valid Product p, 
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return "create";
+		}
+		
 		pService.addProduct(p);
 		return "redirect:/hello";
 	}
 	
-	
+	@PostMapping("/update/{id}")
+	public String updateProduct(@PathVariable("id") int id, Product p) {
+		p.setId(id);
+		pService.update(p);
+		
+		return "redirect:/hello";
+	}
 	
 	@GetMapping("/delete/{id}")
 	public String deleteProduct(@PathVariable("id") int id) {
@@ -55,21 +79,9 @@ public class HelloController {
 		return "redirect:/hello";
 	}
 	
-	@GetMapping("/update/{id}")
-	public String updateView(@PathVariable("id") int id, Model m) {
-		
-		m.addAttribute("product", pService.getById(id) );
-		
-		return "update";
-	}
+
 	
-	@PostMapping("/update/{id}")
-	public String updateProduct(@PathVariable("id") int id, Product p) {
-		p.setId(id);
-		pService.update(p);
-		
-		return "redirect:/hello";
-	}
+
 	
 	
 }

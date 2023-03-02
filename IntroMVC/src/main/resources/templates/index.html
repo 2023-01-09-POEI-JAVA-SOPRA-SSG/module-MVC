@@ -1,38 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+	    <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Index</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	</head>
 	<body>
-		<h1>Welcome to index page</h1>	
-		<p th:text="${date}"></p>
-		
-		<h1>Mes produits :</h1>
-		<table>
-			<thead>
-				<tr>
-					<td>Id</td>
-					<td>Nom</td>
-					<td>Description</td>
-					<td>Prix</td>
-					<td>Quantite</td>
-					<td>Update</td>
-					<td>Delete</td>
-				</tr>
-			</thead>
+		<header class="container col-md-8 my-5">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			  <a class="navbar-brand" href="#">Navbar</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			    <div class="navbar-nav">
+			      <a class="nav-item nav-link active" th:href="@{/hello}">Home <span class="sr-only">(current)</span></a>
+			      <a class="nav-item nav-link" th:href="@{/create}">Features</a>
+			      <a class="nav-item nav-link" href="#">Pricing</a>
+			      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+			    </div>
+			  </div>
+			</nav>
+		</header>
 			
-			<tbody>
-				<tr th:each="product : ${listProducts}">
-					<td th:text="${product.id}" ></td>
-					<td th:text="${product.name}" ></td>
-					<td th:text="${product.description}" ></td>
-					<td th:text="${product.price}" ></td>
-					<td th:text="${product.quantite}" ></td>
-					<td> <a th:href="@{/update/{id}(id=${product.id} )}" >Update</a> </td>
-					<td> <a th:href="@{/delete/{id}(id=${product.id} )}" >Delete</a> </td>
-				</tr>
-			</tbody>
-		</table>		
-		
-		
-		<a href="/create">Create Product</a>
-		
+		<div class="container my-5">
+			<div class="row">
+				<div class="col-md-8">
+					<h1>Mes produits :</h1>
+					<table class="table table-striped table-responsive-md">
+						<thead>
+							<tr>
+								<td scope="col">Id</td>
+								<td scope="col">Nom</td>
+								<td scope="col">Description</td>
+								<td scope="col">Prix</td>
+								<td scope="col">Quantite</td>
+								<td scope="col">Update</td>
+								<td scope="col">Delete</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product : ${listProducts}">
+								<td th:text="${product.id}" scope="row"></td>
+								<td th:text="${product.name}" ></td>
+								<td th:text="${product.description}" ></td>
+								<td th:text="${product.price}" ></td>
+								<td th:text="${product.quantite}" ></td>
+								<td> <a th:href="@{/update/{id}(id=${product.id} )}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a> </td>
+								<td> <a th:href="@{/delete/{id}(id=${product.id} )}" class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a> </td>
+							</tr>
+						</tbody>
+					</table>		
+                    <p class="my-5"><a href="/create" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
